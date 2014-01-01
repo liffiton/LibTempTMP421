@@ -33,7 +33,7 @@ class LibTempTMP421
     void setPtrLoc(uint8_t ptrLoc);
 
   public:
-    LibTempTMP421(uint8_t TempSensorType);
+    LibTempTMP421(bool analog_pin_power=false);
     float GetTemperature(void);
 };
 

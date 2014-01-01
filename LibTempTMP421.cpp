@@ -33,22 +33,22 @@
  ******************************************************************************/
 
 /**
- * Initialize the sensor based on the specified type.
+ * Initialize the Wire library interface, optionally providing
+ * the chip power via the A2 and A3 pins (default off).
+ *
+ * The analog_pin_power option turns on Arduino pins A2, A3 (aka 16, 17) to
+ * power the sensor.  This is necessary due to the fact that Wire.begin() is
+ * called in the constructor and needs to talk to the chip, which needs to be
+ * powered.  If not using these pins for power, leave the parameter at its
+ * default false value.
  */
- LibTempTMP421::LibTempTMP421(uint8_t TempSensorType) {
-	 
-
-	 
-	 /* power the TMP421 Temp Sensor from an Arduino's analog pins
-	  These pin assignments should really be done in the sketch but apparently 
-	  will not work if set after wire.begin is called.
-	  There may be a C++ solution for this of which I am not aware */
-	  
-	  
-	 pinMode(A2, OUTPUT);
-	 digitalWrite(A2, LOW);       // GND pin
-	 pinMode(A3, OUTPUT);
-	 digitalWrite(A3, HIGH);      // VCC pin
+ LibTempTMP421::LibTempTMP421(bool analog_pin_power) {
+    if (analog_pin_power) {
+        pinMode(A2, OUTPUT);
+        digitalWrite(A2, LOW);       // GND pin
+        pinMode(A3, OUTPUT);
+        digitalWrite(A3, HIGH);      // VCC pin
+    }
 
     Wire.begin();
 }
