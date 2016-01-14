@@ -69,10 +69,8 @@ float LibTempTMP421::GetTemperature(void) {
 
     setPtrLoc(0x00);                //high-byte (integer part)
     high = getRegisterValue();
-    high = getRegisterValue();
 
     setPtrLoc(0x10);                //low-byte (fractional part)
-    low = getRegisterValue();
     low = getRegisterValue();
     low >>=4;                       //shift-off the unused bits
 
